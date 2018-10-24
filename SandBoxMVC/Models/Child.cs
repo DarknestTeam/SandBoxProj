@@ -8,6 +8,7 @@ namespace SandBoxMVC.Models
 {
     public class Child
     {
+        //public int ChildId { get; set; }
         public int ChildId { get; set; }
         [Required]
         [Display(Name ="Твой логин")]

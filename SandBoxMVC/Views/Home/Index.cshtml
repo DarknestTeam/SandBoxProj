@@ -20,22 +20,24 @@
             {
                 @Html.AntiForgeryToken()
                 <!--добавить action для формы -->
-                <div class="authorization__login">
-                    <p class="authorization__form-cell">
-                        @*<label class="authorization__title" for="user-login">фамилия</label>*@
-                        @Html.LabelFor(m => m.ChildName, new { @class = "authorization__title", @for = "user-login" })
-                        @*<input class="authorization__field" id="user-login" type="text" name="login" placeholder="">*@
-                        @Html.TextBoxFor(m => m.ChildName, new { @class = "authorization__field", @id = "user-login", @name = "login", @placeholder = "" })
-                    </p>
-                    <p class="authorization__form-cell">
-                        @*<label class="authorization__title" for="user-password">имя</label>*@
-                        @Html.LabelFor(m => m.Password, new { @class = "authorization__title", @for = "user-password" })
-                        <input class="authorization__field" id="user-password" type="password" name="password" placeholder="">
-                        @Html.TextBoxFor(m => m.Password, new { @class = "authorization__field", @id = "password", @name = "password", @placeholder = "" })
-                    </p>
-                    <button class="authorization__button" type="submit">Войти</button>
+            <div class="authorization__login">
+                @Html.ValidationSummary()
+                <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                <p class="authorization__form-cell">
+                    @*<label class="authorization__title" for="user-login">фамилия</label>*@
+                    @Html.LabelFor(m => m.ChildName, new { @class = "authorization__title", @for = "user-login" })
+                    @*<input class="authorization__field" id="user-login" type="text" name="login" placeholder="">*@
+                    @Html.TextBoxFor(m => m.ChildName, new { @class = "authorization__field", @id = "user-login", @name = "login", @placeholder = "" })
+                </p>
+                <p class="authorization__form-cell">
+                    @*<label class="authorization__title" for="user-password">имя</label>*@
+                    @Html.LabelFor(m => m.Password, new { @class = "authorization__title", @for = "user-password" })
+                    <input class="authorization__field" id="user-password" type="password" name="password" placeholder="">
+                    @Html.TextBoxFor(m => m.Password, new { @class = "authorization__field", @id = "password", @name = "password", @placeholder = "" })
+                </p>
+                <button class="authorization__button" type="submit">Войти</button>
 
-                </div>
+            </div>
             }
         </div>
 </section>
@@ -60,7 +62,7 @@
 
 
 
-        <script type="text/javascript">
+        @*<script type="text/javascript">
             var CodeLink = document.querySelector(".authorization__button");
 
             var Code = document.querySelector(".authorization-code");
@@ -78,7 +80,7 @@
                 Code.classList.remove("modal-show");
             });
 
-        </script>
+        </script>*@
 
     </body>
 </html>
