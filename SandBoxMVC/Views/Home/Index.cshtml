@@ -1,0 +1,84 @@
+﻿@model SandBoxMVC.Models.Child
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1">
+    <title>Sandbox-Z - Страница входа</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet">
+</head>
+<body>
+
+
+    <section class="authorization">
+        <h2 class="authorization__main-title">Вход в личный кабинет</h2>
+        <div class="container">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <!--добавить action для формы -->
+                <div class="authorization__login">
+                    <p class="authorization__form-cell">
+                        @*<label class="authorization__title" for="user-login">фамилия</label>*@
+                        @Html.LabelFor(m => m.ChildName, new { @class = "authorization__title", @for = "user-login" })
+                        @*<input class="authorization__field" id="user-login" type="text" name="login" placeholder="">*@
+                        @Html.TextBoxFor(m => m.ChildName, new { @class = "authorization__field", @id = "user-login", @name = "login", @placeholder = "" })
+                    </p>
+                    <p class="authorization__form-cell">
+                        @*<label class="authorization__title" for="user-password">имя</label>*@
+                        @Html.LabelFor(m => m.Password, new { @class = "authorization__title", @for = "user-password" })
+                        <input class="authorization__field" id="user-password" type="password" name="password" placeholder="">
+                        @Html.TextBoxFor(m => m.Password, new { @class = "authorization__field", @id = "password", @name = "password", @placeholder = "" })
+                    </p>
+                    <button class="authorization__button" type="submit">Войти</button>
+
+                </div>
+            }
+        </div>
+</section>
+
+        @*<section class="authorization-code">
+            <h2 class="authorization-code__main-title">введите код c карты кодов</h2>
+            <div class="container">
+                <form class="authorization-code__form" action="#" method="post">
+                    добавить action для формы 
+                    <div class="authorization-code__login">
+                        <p class="authorization-code__form-cell">
+                            <label class="authorization-code__title" for="user-code">№27</label>
+                            <input class="authorization-code__field" id="user-code" type="text" name="login" placeholder="код">
+                        </p>
+
+                        <button class="authorization-code__button" type="submit">Войти</button>
+                </form>
+                <a href="#"><button class="modal-close" type="button">Закрыть</button></a>
+            </div>
+
+        </section>*@
+
+
+
+        <script type="text/javascript">
+            var CodeLink = document.querySelector(".authorization__button");
+
+            var Code = document.querySelector(".authorization-code");
+            var CodeClose = Code.querySelector(".modal-close");
+            var form = Code.querySelector("form");
+
+            CodeLink.addEventListener("click", function (evt) {
+                evt.preventDefault();
+                Code.classList.add("modal-show");
+
+            });
+
+            CodeClose.addEventListener("click", function (evt) {
+                evt.preventDefault();
+                Code.classList.remove("modal-show");
+            });
+
+        </script>
+
+    </body>
+</html>
