@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="account">
+    <div class="container">
+        <h2 class="account__title">мой баланс</h2>
+        <ul class="account__list">
+            <div class="account__state">
+                <li class="state__amount">@ViewData["Money"]</li>
+                <li class="state__item">белорусских рублей</li>
+            </div>
+            <div class="account__other-state">
+                <div class="account__deposits">
+                    <h3 class="deposits__title other-state__title">мои депозиты</h3>
+                    <li class="deposits__item other-state__item"></li>
+                </div>
+                <div class="account__securities">
+                    <h3 class="securities__title other-state__title">мои ценные бумаги</h3>
+                    <li class="securities__item other-state__item"></li>
+                </div>
+            </div>
+        </ul>
+    </div>
+</section>

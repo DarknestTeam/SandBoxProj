@@ -11,10 +11,12 @@ namespace SandBoxMVC.Models
         //public int ChildId { get; set; }
         public int ChildId { get; set; }
         [Required]
-        [Display(Name ="Твой логин")]
+        [Display(Name = "Твой логин")]
         public string ChildName { get; set; }
         [Required]
         [Display(Name = "Твой пароль")]
         public string Password { get; set; }
+        
+        public int Bill { get; set; }
     }
 }

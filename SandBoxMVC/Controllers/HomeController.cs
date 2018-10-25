@@ -10,11 +10,21 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace SandBoxMVC.Controllers
 {
     public class HomeController : Controller
     {
+        ApplicationContext db;
+        public HomeController()
+        {
+           
+        }
+        public HomeController(ApplicationContext context)
+        {
+            db = context;
+        }
         private ApplicationUserManager UserManager
         {
             get
@@ -67,6 +77,48 @@ namespace SandBoxMVC.Controllers
         {
             AuthenticationManager.SignOut();
             return RedirectToAction("Index");
+        }
+        [Authorize]
+        public ActionResult  Account()
+        {   
+            ViewData["Money"] = CurrentBalanse(Membership.GetUser().ProviderUserKey.ToString());
+            return View();
+        }
+
+        public  Child  GetChild (string id)
+        {
+            
+            
+                 var  child = db.Children.Find(id);
+                if ( id != null && child != null)
+                {
+                    return child;
+                }
+
+                return (child =null);
+
+        }
+        public int CurrentBalanse(string  id) 
+        {
+            var  child =GetChild(id);
+            if (child != null)
+            {
+                return child.Bill;
+                
+            }
+            else
+            { return 0; }
+
+        }
+        public void Replenish(string id, int  money)
+        {
+            var person = GetChild(id);
+            if (person != null)
+            {
+                person.Bill += money;
+                db.SaveChanges();
+            }
+
         }
 
     }
