@@ -11,12 +11,15 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 
 namespace SandBoxMVC.Controllers
 {
     public class HomeController : Controller
     {
         ApplicationContext db;
+        
         public HomeController()
         {
            
@@ -24,7 +27,10 @@ namespace SandBoxMVC.Controllers
         public HomeController(ApplicationContext context)
         {
             db = context;
+
         }
+
+
         private ApplicationUserManager UserManager
         {
             get
@@ -38,8 +44,50 @@ namespace SandBoxMVC.Controllers
             {
                 return HttpContext.GetOwinContext().Authentication;
             }
-        }   
-        public ActionResult Index(string returnUrl)
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Register(Parent model)
+        {
+            if (ModelState.IsValid)
+            {
+                  ApplicationUser user = await UserManager.FindByIdAsync(model.IdMBank);
+                 if (user == null)
+                  {
+                    user = new  ApplicationUser{ Email = model.Name, UserName = model.Name};
+                 
+                    IdentityResult  result = await UserManager.CreateAsync(user, model.Password);
+                  //  await UserManager.AddToRoleAsync(user.Id, "guest");
+
+                    Parent parent = new Parent { Id = user.Id, Name = model.Name, Surname = model.Surname, Patronymic = model.Patronymic, Password = model.Password, IdMBank = model.IdMBank, SumRefill = model.SumRefill, Bill = model.Bill };
+                    db.Parents.Add(parent);
+                    //db.Configuration.ValidateOnSaveEnabled = true;
+                    db.SaveChanges();
+                    if (result.Succeeded)
+                    {
+                       return RedirectToAction("Login", "Account");
+                    }
+                    else
+                    {
+                      foreach (string error in result.Errors)
+                       {
+                        ModelState.AddModelError("", error);
+                       }               
+                    }
+                    //await db.UserManager.AddToRoleAsync(user.Id, );                   
+                   }                                            
+                }
+               return View(model);
+           }
+
+    
+
+     public ActionResult Index(string returnUrl)
         {
             ViewBag.returnUrl = returnUrl;
             return View();

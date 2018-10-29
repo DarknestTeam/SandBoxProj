@@ -18,7 +18,8 @@ namespace SandBoxMVC.Models
         public DbSet<History> Histories { get; set; }
 
         public ApplicationContext() : base("DefaultConnection")
-        { }
+        {
+        }
 
         public static ApplicationContext Create()
         {

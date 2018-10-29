@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\SandBoxMVC"
+    "\\SandBoxMVC",
+    "\\SandBoxMVC\\App_Start",
+    "\\SandBoxMVC\\Controllers",
+    "\\SandBoxMVC\\Models"
   ],
-  "SelectedNode": "\\SandBoxMVC",
+  "SelectedNode": "\\SandBoxMVC\\Controllers\\HomeController.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -8,6 +8,7 @@ namespace SandBoxMVC.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public ApplicationUser() { }
+       public virtual Parent  Parent { get; set; }
+       //public ApplicationUser() { }
     }
 }
